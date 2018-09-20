@@ -1,24 +1,29 @@
 const express = require('express');
 const app = express();
 
+courses = [
+  { id: 1, name: 'Node js' },
+  { id: 2, name: 'React JS' },
+  { id: 3, name: 'Mongo Db' }
+];
+
 app.get('/', (req, res) => {
   res.send('Hello World !!!');
 });
 
 app.get('/api/courses', (req, res) => {
-  res.send([1, 2, 3]);
+  res.send(courses);
 });
 
-// Route with parameter
 app.get('/api/courses/:id', (req, res) => {
-  res.send(req.params.id);
-});
+  const course = courses.find(c => c.id === parseInt(req.params.id));
 
-// Route with multiple parameter
-app.get('/api/posts/:year/:month', (req, res) => {
-  res.send(req.params);
-  // for query
-  // res.send(req.query);
+  if (!course) {
+    // 404 not found
+    res.status(404).send('The course with given id not found');
+  } else {
+    res.send(course);
+  }
 });
 
 const port = process.env.PORT || 3000;
