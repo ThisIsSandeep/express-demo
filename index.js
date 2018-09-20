@@ -9,6 +9,17 @@ app.get('/api/courses', (req, res) => {
   res.send([1, 2, 3]);
 });
 
-// process global object
+// Route with parameter
+app.get('/api/courses/:id', (req, res) => {
+  res.send(req.params.id);
+});
+
+// Route with multiple parameter
+app.get('/api/posts/:year/:month', (req, res) => {
+  res.send(req.params);
+  // for query
+  // res.send(req.query);
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
