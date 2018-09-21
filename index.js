@@ -6,6 +6,11 @@ const logger = require('./logger');
 const express = require('express');
 const app = express();
 
+// ------ template engines (sometimes we wanna show html to user where template engines comes into picture) ---------
+// When we set view engine to pug express load internally pug module we don't need to require explicitly
+app.set('view engine', 'pug');
+// app.set('views', './views'); // default and its optional
+
 // Environments
 console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 console.log(`App: ${app.get('env')}`); // If NODE_ENV is not setup by default app.get gives development env
@@ -37,7 +42,11 @@ courses = [
 ];
 
 app.get('/', (req, res) => {
-  res.send('Hello World !!!');
+  // res.send('Hello World !!!');
+  res.render('index', {
+    title: 'My Express App',
+    message: 'My Express App!'
+  });
 });
 
 app.get('/api/courses', (req, res) => {
