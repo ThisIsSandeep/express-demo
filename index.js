@@ -1,8 +1,12 @@
 const Joi = require('joi');
+const logger = require('./logger');
 const express = require('express');
 const app = express();
 
 app.use(express.json());
+
+// Middleware function
+app.use(logger);
 
 courses = [
   { id: 1, name: 'Node js' },
