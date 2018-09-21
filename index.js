@@ -5,7 +5,11 @@ const app = express();
 
 app.use(express.json());
 
-// Middleware function
+// Buit in middleware function
+app.use(express.static('public'));
+// Also check urlencoded built in middleware
+
+// Custom Middleware function
 app.use(logger);
 
 courses = [
