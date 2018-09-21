@@ -1,3 +1,5 @@
+const morgan = require('morgan');
+const helmet = require('helmet');
 const Joi = require('joi');
 const logger = require('./logger');
 const express = require('express');
@@ -11,6 +13,10 @@ app.use(express.static('public'));
 
 // Custom Middleware function
 app.use(logger);
+
+// Third party middleware
+app.use(helmet());
+app.use(morgan('tiny'));
 
 courses = [
   { id: 1, name: 'Node js' },
