@@ -5,6 +5,10 @@ const logger = require('./logger');
 const express = require('express');
 const app = express();
 
+// Environments
+console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+console.log(`App: ${app.get('env')}`); // If NODE_ENV is not setup by default app.get gives development env
+
 app.use(express.json());
 
 // Buit in middleware function
@@ -16,7 +20,10 @@ app.use(logger);
 
 // Third party middleware
 app.use(helmet());
-app.use(morgan('tiny'));
+if (app.get('env') === 'development') {
+  app.use(morgan('tiny'));
+  console.log('Morgan enabled...');
+}
 
 courses = [
   { id: 1, name: 'Node js' },
